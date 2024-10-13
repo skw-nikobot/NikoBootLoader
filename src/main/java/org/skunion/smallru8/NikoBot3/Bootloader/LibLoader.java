@@ -97,7 +97,7 @@ public class LibLoader {
 				i++;
 			}
 			
-			Class<?> mainClass = Ext_LIB.loadClass(classPath);
+			Class<?> mainClass = LIB.loadClass(classPath);
 			Object obj = mainClass.getDeclaredConstructor().newInstance();
 			
 			if(i>0) {
