@@ -2,6 +2,8 @@
 
 ## Start NikoBot with Libs
 Load custom libs(jar) before NikoBot start.  
+## Require  
+java version 21  
 #### Usage:  
 
 ```Put NikoBot.jar(v3.6 or later version) and others dependencies into libs/ folder.```  

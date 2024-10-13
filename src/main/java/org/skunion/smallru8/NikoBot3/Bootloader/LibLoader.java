@@ -7,7 +7,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
@@ -124,9 +124,8 @@ public class LibLoader {
 			if(libsPath[i].endsWith(".jar")) {//only load jar file
 				System.out.println("[LOAD][LIB]:Load "+libsPath[i]+".");
 				try {
-					urlTmp.add(new URL("file:libs/"+libsPath[i]));
-				} catch (MalformedURLException e) {
-					// TODO Auto-generated catch block
+					urlTmp.add(new URI("file:libs/"+libsPath[i]).toURL());
+				} catch (Exception e) {
 					System.out.println("[WARN][LIB]:Failed. When loading " + libsPath[i]+".");
 					e.printStackTrace();
 				}
@@ -136,8 +135,7 @@ public class LibLoader {
 		for(int i=0;i<urlTmp.size();i++)
 			urls[i] = urlTmp.get(i);
 		urlTmp.clear();
-		LIB = new URLClassLoader(urls,ClassLoader.getSystemClassLoader());
-		
+		LIB = new URLClassLoader(urls,Ext_LIB);	
 	}
 	
 	/**
@@ -152,7 +150,7 @@ public class LibLoader {
 			if((!tmp.startsWith("//"))&&tmp.endsWith(".jar")) {
 				try {
 					System.out.println("[LOAD][LIB]:Load "+tmp+".");
-					urlTmp.add(new URL("file:"+tmp));
+					urlTmp.add(new URI("file:"+tmp).toURL());
 				} catch (Exception exp) {
 					System.out.println("[WARN][LIB]:Failed. When loading " + tmp +".");
 					exp.printStackTrace();
@@ -165,6 +163,6 @@ public class LibLoader {
 		for(int i=0;i<urlTmp.size();i++)
 			urls[i] = urlTmp.get(i);
 		urlTmp.clear();
-		Ext_LIB = new URLClassLoader(urls,LIB);
+		Ext_LIB = new URLClassLoader(urls,ClassLoader.getSystemClassLoader());
 	}
 }

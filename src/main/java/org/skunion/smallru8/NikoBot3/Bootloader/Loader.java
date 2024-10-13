@@ -7,8 +7,8 @@ public class Loader {
 	public static void main(String[] args) throws IOException
     {
 		LibLoader LL = new LibLoader();
-		LL.loadLibs();
 		LL.loadExtLibs();
+		LL.loadLibs();
 		LL.entryPoint();
     }
 	
